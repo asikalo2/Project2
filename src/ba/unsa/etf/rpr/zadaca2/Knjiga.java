@@ -3,12 +3,19 @@ package ba.unsa.etf.rpr.zadaca2;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Knjiga {
+/*Pored postojećih atributa, klasa Knjiga treba imati i atribut datumIzdanja. Metoda
+getDatumIzdanja treba vraćati vrijednost tipa java.time.LocalDate.
+*/
+
     private SimpleStringProperty autor = new SimpleStringProperty("");
     private SimpleStringProperty naslov = new SimpleStringProperty("");
     private SimpleStringProperty isbn = new SimpleStringProperty("");
     private SimpleIntegerProperty brojStranica = new SimpleIntegerProperty(0);
-
+    private java.time.LocalDate datumIzdanja;
     public Knjiga() {}
 
     public Knjiga(String a, String n, String i, int b) {
@@ -73,4 +80,12 @@ public class Knjiga {
         return autor.get() + ", " + naslov.get();
     }
 
+
+    public LocalDate getDatumIzdanja() {
+        return datumIzdanja;
+    }
+
+    public void setDatumIzdanja(LocalDate datumIzdanja) {
+        this.datumIzdanja = datumIzdanja;
+    }
 }

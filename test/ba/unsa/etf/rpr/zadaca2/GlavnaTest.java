@@ -34,6 +34,7 @@ import java.util.List;
 
 @ExtendWith(ApplicationExtension.class)
 class GlavnaTest {
+    /*
     Stage theStage;
     BibliotekaModel model;
     GlavnaController controller;
