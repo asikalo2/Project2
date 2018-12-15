@@ -19,6 +19,7 @@ public class Main extends Application {
         primaryStage.setTitle("Biblioteka");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+        // test pusha na repo
     }
 
 
