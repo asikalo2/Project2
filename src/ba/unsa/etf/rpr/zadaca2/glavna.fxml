@@ -1,157 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.collections.FXCollections?>
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<?import java.net.URL?>
-
-<GridPane alignment="CENTER" vgap="4" hgap="4" fx:controller="ba.unsa.etf.rpr.zadaca2.GlavnaController"
-          xmlns="http://javafx.com/javafx/8.0.172-ea"
-          xmlns:fx="http://javafx.com/fxml/1">
-    <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-    </padding>
-    <columnConstraints>
-        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
-        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
-        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints percentHeight="40" vgrow="ALWAYS"/>
-        <RowConstraints percentHeight="40" vgrow="ALWAYS"/>
-        <RowConstraints percentHeight="20" vgrow="ALWAYS"/>
-    </rowConstraints>
-
-<children>
-
-    <GridPane vgap="4" hgap="4" styleClass="groupBox" GridPane.rowIndex="0" GridPane.columnIndex="0"
-              maxWidth="Infinity" maxHeight="Infinity">
-        <padding>
-            <Insets top="5" right="5" bottom="5" left="5"/>
-        </padding>
-        <children>
-            TableView treba imati fx:id ​tabelaKnjiga​​, kolone trebaju biti: Naslov, Autor i Datum izdanja.
-            Izmjena i brisanje se odnose na knjigu trenutno izabranu u TableView, a također dvoklik na knjigu u tabeli
-            treba pokrenuti izmjenu knjige (objašnjeno kasnije). ●
-
-            <Label fx:id="glavniMeniLabel" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"
-                   maxHeight="Infinity" maxWidth="Infinity" text="glavniMeni" styleClass="naslovGrupe"/>
-
-            <Label fx:id="FileLabel1" GridPane.rowIndex="3" GridPane.columnIndex="0"
-                   maxHeight="Infinity" maxWidth="Infinity" text="File"/>
-
-            <ComboBox fx:id="FileLabel" GridPane.rowIndex="3" GridPane.columnIndex="1" editable="true"
-                      maxWidth="Infinity">
+<VBox id="vbox" prefHeight="400" prefWidth="800"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ba.unsa.etf.rpr.zadaca2.GlavnaController">
+    <MenuBar fx:id="menuBar">
+        <menus>
+            <Menu text="File">
                 <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Open"/>
-                        <String fx:value="Save"/>
-                        <String fx:value="Print"/>
-                        <String fx:value="Exit"/>
-                    </FXCollections>
+                    <MenuItem text="Open" onAction="#OpenAction"/>
+                    <MenuItem text="Save" onAction="#SaveAction"/>
+                    <MenuItem text="Print" onAction="#PrintAction"/>
+                    <SeparatorMenuItem  />
+                    <MenuItem text="Exit" onAction="#ExitAction"/>
                 </items>
-            </ComboBox>
-
-            <Label fx:id="EditLabel1" GridPane.rowIndex="3" GridPane.columnIndex="0"
-                   maxHeight="Infinity" maxWidth="Infinity" text="Edit"/>
-
-            <ComboBox fx:id="EditLabel" GridPane.rowIndex="3" GridPane.columnIndex="1" editable="true"
-                      maxWidth="Infinity">
+            </Menu>
+            <Menu text="Edit">
                 <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Add"/>
-                        <String fx:value="Change"/>
-                        <String fx:value="Delete"/>
-                    </FXCollections>
+                    <MenuItem text="Add" onAction="#AddAction"/>
+                    <MenuItem text="Change" onAction="#ChangeAction"/>
+                    <MenuItem text="Delete" onAction="#DeleteAction"/>
                 </items>
-            </ComboBox>
-
-            <Label fx:id="HelpLabel1" GridPane.rowIndex="3" GridPane.columnIndex="0"
-                   maxHeight="Infinity" maxWidth="Infinity" text="Help"/>
-
-            <ComboBox fx:id="HelpLabel" GridPane.rowIndex="3" GridPane.columnIndex="1" editable="true"
-                      maxWidth="Infinity">
+            </Menu>
+            <Menu text="Help">
                 <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="About"/>
-                    </FXCollections>
+                    <MenuItem text="About" onAction="#handleAboutAction"/>
                 </items>
-            </ComboBox>
+            </Menu>
+        </menus>
+    </MenuBar>
+    <ToolBar>
+        <items>
+            <Region styleClass="spacer" />
+            <HBox styleClass="segmented-button-bar">
+                <Button text="Add" onAction="#tbAdd" styleClass="first" />
+                <Button text="Change" onAction="#tbChange"  />
+                <Button text="Delete" onAction="#tbDelete" styleClass="last" />
+            </HBox>
+        </items>
+    </ToolBar>
+    <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <columns>
+            <TableColumn text="Naslov">
+            </TableColumn>
+            <TableColumn text="Autor">
+            </TableColumn>
+            <TableColumn text="Datum">
+            </TableColumn>
+        </columns>
+    </TableView>
 
-        </children>
-    </GridPane>
-
-    <GridPane vgap="4" hgap="4" styleClass="groupBox" GridPane.rowIndex="0" GridPane.columnIndex="1"
-              maxWidth="Infinity" maxHeight="Infinity">
-        <padding>
-            <Insets top="5" right="5" bottom="5" left="5"/>
-        </padding>
-        <children>
-            <Label fx:id="trakaSaAlatimaLabel" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                   GridPane.columnSpan="2" maxHeight="Infinity" maxWidth="Infinity" text="Traka sa alatima"
-                   styleClass="naslovGrupe"/>
-
-            <Label fx:id="tbAdd1" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                   maxHeight="Infinity" maxWidth="Infinity" text="Add:"/>
-
-            <TextField fx:id="tbAdd" GridPane.rowIndex="1" GridPane.columnIndex="1" maxWidth="Infinity"/>
-
-            <Label fx:id="tbChange1" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                   maxHeight="Infinity" maxWidth="Infinity" text="Change"/>
-
-            <TextField fx:id="tbChange" GridPane.rowIndex="1" GridPane.columnIndex="1" maxWidth="Infinity"/>
-
-            <Label fx:id="tbDelete1" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                   maxHeight="Infinity" maxWidth="Infinity" text="Delete"/>
-
-            <TextField fx:id="tbDelete" GridPane.rowIndex="1" GridPane.columnIndex="1" maxWidth="Infinity"/>
-
-        </children>
-    </GridPane>
-
-    <GridPane vgap="4" hgap="4" styleClass="groupBox" GridPane.rowIndex="1" GridPane.columnIndex="0"
-              maxWidth="Infinity" maxHeight="Infinity">
-        <padding>
-            <Insets top="5" right="5" bottom="5" left="5"/>
-        </padding>
-        <children>
-            <Label fx:id="statusnaTrakaLabel" GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.columnSpan="2"
-                   maxHeight="Infinity" maxWidth="Infinity" text="Statusna traka" styleClass="naslovGrupe"/>
-            <Label fx:id="statusMsg1" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                   maxHeight="Infinity" maxWidth="Infinity" text="statusna poruka"/>
-
-            <TextField fx:id="statusMsg" GridPane.rowIndex="1" GridPane.columnIndex="1" maxWidth="Infinity"/>
-            ​
-        </children>
-    </GridPane>
-
-    <GridPane vgap="4" hgap="4" styleClass="groupBox" GridPane.rowIndex="1" GridPane.columnIndex="1"
-              maxWidth="Infinity" maxHeight="Infinity">
-        <padding>
-            <Insets top="5" right="5" bottom="5" left="5"/>
-        </padding>
-        <children>
-            <Label fx:id="tabelaKnjiga" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.columnSpan="2"
-                   maxHeight="Infinity" maxWidth="Infinity" text="Tabela knjiga" styleClass="naslovGrupe"/>
-
-        </children>
-    </GridPane>
-
-</children>
-</GridPane>
+</VBox>

@@ -8,9 +8,15 @@ GlavnaController.
 
 
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -24,21 +30,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class GlavnaController {
-    public Label trakaSaAlatimaLabel;
-    public Label glavniMeniLabel;
-    public Label statusnaTrakaLabel;
-    public Label tabelaKnjiga;
-
-
-    public ComboBox FileLabel;
-    public ComboBox EditLabel;
-    public ComboBox HelpLabel;
-    public TextField tbChange;
-    public TextField tbDelete;
-    public TextField tbAdd;
-    public TextField statusMsg;
+    @FXML
+    private MenuBar menuBar;
 
     /* Opcija Save treba zapisati podatke u XML datoteku, a Open treba učitati iz XML datoteke.
     Potrebno je koristiti standardni open/save dijalog. Jedini podržani filter za ekstenziju treba biti
@@ -65,7 +61,7 @@ public class GlavnaController {
     }
 
     public static void doOpen(File f) {// čitanje iz datoteke
-        File fx = new File();
+        //File fx = new File();
         ArrayList<Knjiga> knjige = new ArrayList<Knjiga>();
         Document xmldoc = null;
         try {
@@ -92,8 +88,8 @@ public class GlavnaController {
                     Element isbn = (Element) e.getElementsByTagName("isbn").item(0);
                     String isbnNaziv = isbn.getElementsByTagName("isbn").item(0).getTextContent();
 
-                    Knjiga k = new Knjiga(naslov, autor, isbn, brojStranica);
-                    knjige.add(k);
+                    //Knjiga k = new Knjiga(naslov, autor, isbn, brojStranica);
+                    //knjige.add(k);
                 }
 
             }
@@ -103,6 +99,48 @@ public class GlavnaController {
         }
 
     }
+
+    public GlavnaController() {}
+
+    @FXML
+    public void initialize() {
+        menuBar.setFocusTraversable(true);
+    }
+
+    public void handleAboutAction(ActionEvent actionEvent) {
+        System.out.println("About");
+    }
+
+    public void OpenAction(ActionEvent actionEvent) {
+    }
+
+    public void SaveAction(ActionEvent actionEvent) {
+    }
+
+    public void PrintAction(ActionEvent actionEvent) {
+    }
+
+    public void ExitAction(ActionEvent actionEvent) {
+    }
+
+    public void AddAction(ActionEvent actionEvent) {
+    }
+
+    public void ChangeAction(ActionEvent actionEvent) {
+    }
+
+    public void DeleteAction(ActionEvent actionEvent) {
+    }
+
+    public void tbAdd(ActionEvent actionEvent) {
+    }
+
+    public void tbDelete(ActionEvent actionEvent) {
+    }
+
+    public void tbChange(ActionEvent actionEvent) {
+    }
+
 
     /*○ Pošto još uvijek nismo obradili rad sa štampačem,
        opcija Print treba ispisati na standardni izlaz spisak knjiga u sljedećem obliku: Knjige su: Autor, Naslov,
