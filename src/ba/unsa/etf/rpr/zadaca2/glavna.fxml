@@ -12,7 +12,7 @@
         <menus>
             <Menu text="File">
                 <items>
-                    <MenuItem text="Open" onAction="#OpenAction"/>
+                    <MenuItem text="Open" onAction="#doOpen"/>
                     <MenuItem text="Save" onAction="#SaveAction"/>
                     <MenuItem text="Print" onAction="#PrintAction"/>
                     <SeparatorMenuItem  />

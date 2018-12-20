@@ -53,6 +53,8 @@ public class BibliotekaController {
     }
 
     public void ispisiKnjige(ActionEvent actionEvent) {
-        model.ispisiKnjige();
+        BibliotekaModel b = new BibliotekaModel();
+        System.out.println("Knjige su:\n" + b.dajKnjige());
+        //model.ispisiKnjige();
     }
 }

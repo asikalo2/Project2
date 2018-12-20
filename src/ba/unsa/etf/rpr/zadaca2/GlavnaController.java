@@ -117,7 +117,15 @@ public class GlavnaController {
     public void SaveAction(ActionEvent actionEvent) {
     }
 
+    /*Pošto još uvijek nismo obradili rad sa štampačem, opcija Print treba ispisati na standardni izlaz spisak knjiga
+    u sljedećem obliku: Knjige su: Autor, Naslov, ISBN, 123, 01. 01. 1980 Autor, Naslov, ISBN, 123, 01. 01. 1980 ...
+    Ova opcija treba biti implementirana pomoću metode ​dajKnjige​​ u klasi BibliotekaModel koja treba vratiti string
+    istog oblika (bez poruke "Knjige su:"), a zatim metoda ​ispisiKnjige​​ treba pozvati metodu dajKnjige te ispisati
+    "Knjige su:\n" i string koji je vratila spomenuta metoda. */
+
     public void PrintAction(ActionEvent actionEvent) {
+        BibliotekaModel b = new BibliotekaModel();
+        System.out.println("Knjige su:" + b.dajKnjige());
     }
 
     public void ExitAction(ActionEvent actionEvent) {
@@ -139,6 +147,9 @@ public class GlavnaController {
     }
 
     public void tbChange(ActionEvent actionEvent) {
+    }
+
+    public void doOpen(ActionEvent actionEvent) {
     }
 
 
