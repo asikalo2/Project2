@@ -17,7 +17,6 @@ public class AboutForma {
 
     @FXML
     public void initialize() {
-        ClassLoader classLoader = getClass().getClassLoader();
         String imageFile = "src/ba/unsa/etf/rpr/zadaca2/slika.png";
 
         try {
