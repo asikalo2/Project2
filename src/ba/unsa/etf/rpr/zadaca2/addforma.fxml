@@ -59,7 +59,7 @@
     <Label fx:id="datumIzdanjaLabel" GridPane.rowIndex="1" GridPane.columnIndex="4"
            maxHeight="Infinity" maxWidth="Infinity" text="Datum izdanja:"/>
 
-    <DatePicker fx:id="datumIzdanjaField" GridPane.rowIndex="1" GridPane.columnIndex="5"
+    <DatePicker fx:id="knjigaDatum" GridPane.rowIndex="1" GridPane.columnIndex="5"
                 maxWidth="Infinity"/>
 
 

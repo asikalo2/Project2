@@ -23,18 +23,23 @@ jedan razmak, te da nema zareza na kraju reda.*/
     private ObjectProperty<Knjiga> trenutnaKnjiga = new SimpleObjectProperty<>();
 
 
-    public ArrayList<String> dajKnjige(){
-        ArrayList<String> lista = new ArrayList<>();
+    public String dajKnjige(){
         String s = "";
+        String stringic = "";
+        int i = 0;
 
-        for (Knjiga k : knjige) {
-            s = datumString(k.getDatumIzdanja());
-            lista.add(k.getAutor() + ", " + k.getNaslov() + ", " + k.getBrojStranica() + ", " + s);
+        for (i=0; i<knjige.size(); i++){
+            s = datumString(knjige.get(i).getDatumIzdanja());
+            stringic += knjige.get(i).getAutor() + ", " + knjige.get(i).getNaslov() + ", " +
+                    knjige.get(i).getBrojStranica() + ", " + s + "\n";
         }
-        return lista;
+
+        return stringic;
     }
 
     public String datumString(LocalDate d){
+        if (d == null)
+            return "";
         String datum;
         datum = d.getDayOfMonth() + ". " + d.getMonth() + ". " + d.getYear();
         return datum;
@@ -61,8 +66,6 @@ jedan razmak, te da nema zareza na kraju reda.*/
             System.out.println(k);
     }
 
-    /*Ovu funkcionalnost treba realizirati pravljenjem metode ​deleteKnjiga()​​ u klasi BibliotekaModel koja će iz liste
-    knjiga izbaciti trenutnu knjigu, a zatim postaviti atribut trenutnaKnjiga na ​null​​.*/
     void napuni() {
         knjige.add(new Knjiga("Meša Selimović", "Tvrđava", "abcd", 500));
         knjige.add(new Knjiga("Ivo Andrić", "Travnička hronika", "abcd", 500));
@@ -70,13 +73,21 @@ jedan razmak, te da nema zareza na kraju reda.*/
         //trenutnaKnjiga.set(null);
     }
 
-    public void deleteKnjiga(Knjiga k){
+    public void deleteKnjiga(){
         int i=0;
         for(i=0; i<knjige.size(); i++){
-            if(knjige.get(i).equals(k)) {
-                knjige.remove(i);
+            if(knjige.get(i).equals(trenutnaKnjiga)) {
+                knjige.remove(trenutnaKnjiga);
                 trenutnaKnjiga = null;
             }
         }
+    }
+
+    public void addKnjiga(Knjiga k){
+        Knjiga knjiga = new Knjiga();
+        knjiga.setAutor(k.getAutor());
+        knjiga.setNaslov(k.getNaslov());
+        knjiga.setBrojStranica(k.getBrojStranica());
+        knjige.add(knjiga);
     }
 }

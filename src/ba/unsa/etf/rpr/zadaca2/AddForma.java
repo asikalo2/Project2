@@ -30,7 +30,7 @@ public class AddForma {
     public TextField naslovField;
     public TextField autorField;
     public TextField ISBNField;
-    public DatePicker datumIzdanjaField;
+    public DatePicker knjigaDatum;
 
     public SimpleStringProperty naslovProperty;
     public SimpleStringProperty autorProperty;
@@ -38,12 +38,6 @@ public class AddForma {
 
 
     public ValidationSupport validation;
-    public ComboBox odsjekField;
-    public ComboBox godinaStudijaField;
-    public ComboBox ciklusStudijaField;
-    public ComboBox redovanSamofinansirajuciField;
-    public ComboBox posebnaKategorijaField;
-    public Button potvrdiBtn;
 
     public AddForma() {
         naslovProperty = new SimpleStringProperty("");
@@ -60,12 +54,12 @@ public class AddForma {
         naslovField.textProperty().bindBidirectional(naslovProperty);
         autorField.textProperty().bindBidirectional(autorProperty);
         ISBNField.textProperty().bindBidirectional(ISBNProperty);
-        datumIzdanjaField.setConverter(new StringConverter<LocalDate>() {
+        knjigaDatum.setConverter(new StringConverter<LocalDate>() {
             String pattern = "dd/MM/yyyy";
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
 
             {
-                datumIzdanjaField.setPromptText(pattern.toLowerCase());
+                knjigaDatum.setPromptText(pattern.toLowerCase());
             }
 
             @Override
@@ -290,36 +284,36 @@ public class AddForma {
 
 
         // Listener za datum rodjenja
-        datumIzdanjaField.getEditor().textProperty().addListener((observableValue, s, t1) -> {
+        knjigaDatum.getEditor().textProperty().addListener((observableValue, s, t1) -> {
             if (ispravanDatum(t1)) {
-                datumIzdanjaField.getStyleClass().removeAll("poljeNijeIspravno");
-                datumIzdanjaField.getStyleClass().add("poljeIspravno");
+                knjigaDatum.getStyleClass().removeAll("poljeNijeIspravno");
+                knjigaDatum.getStyleClass().add("poljeIspravno");
             } else {
-                datumIzdanjaField.getStyleClass().removeAll("poljeIspravno");
-                datumIzdanjaField.getStyleClass().add("poljeNijeIspravno");
+                knjigaDatum.getStyleClass().removeAll("poljeIspravno");
+                knjigaDatum.getStyleClass().add("poljeNijeIspravno");
             }
         });
 
-        datumIzdanjaField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        knjigaDatum.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
-                if (!datumIzdanjaField.isFocused()) {
+                if (!knjigaDatum.isFocused()) {
                     //Kombinacija empty string validatora i
                     // predicate validatora koji poziva metodu validnost
                     Validator validator = Validator.combine(
                             Validator.createEmptyValidator("Datum rođenja ne može biti prazan!"),
                             Validator.createPredicateValidator((Predicate<LocalDate>) localDate -> {
-                                LocalDate ld = datumIzdanjaField.getValue();
+                                LocalDate ld = knjigaDatum.getValue();
                                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                                 String strDate = ld.format(formatter);
                                 return ispravanDatum(strDate);
                             }, "Neispravan datum!")
                     );
-                    validation.registerValidator(datumIzdanjaField, true, validator);
+                    validation.registerValidator(knjigaDatum, true, validator);
                 } else {
                     // Hack sa controlsFX bitbucketa (u sustini registrira prazan validator ako komponenta nije
                     // fokusirana
-                    validation.registerValidator(datumIzdanjaField, false, (Control c, LocalDate s) ->
+                    validation.registerValidator(knjigaDatum, false, (Control c, LocalDate s) ->
                             ValidationResult.fromErrorIf(c, "", false));
                 }
             }

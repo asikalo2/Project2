@@ -36,6 +36,7 @@ public class GlavnaController {
    // private static final BasicTextFieldUI Dialogs = ;
     @FXML
     private MenuBar menuBar;
+    BibliotekaModel b;
 
     /* Opcija Save treba zapisati podatke u XML datoteku, a Open treba učitati iz XML datoteke.
     Potrebno je koristiti standardni open/save dijalog. Jedini podržani filter za ekstenziju treba biti
@@ -101,7 +102,9 @@ public class GlavnaController {
 
     }
 
-    public GlavnaController() {}
+    public GlavnaController(BibliotekaModel bibliotekaModel) {
+        this.b = bibliotekaModel;
+    }
 
     @FXML
     public void initialize() {

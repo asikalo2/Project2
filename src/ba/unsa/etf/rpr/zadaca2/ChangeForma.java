@@ -37,12 +37,6 @@ public class ChangeForma {
 
 
     public ValidationSupport validation;
-    public ComboBox odsjekField;
-    public ComboBox godinaStudijaField;
-    public ComboBox ciklusStudijaField;
-    public ComboBox redovanSamofinansirajuciField;
-    public ComboBox posebnaKategorijaField;
-    public Button potvrdiBtn;
 
     public ChangeForma() {
         naslovProperty = new SimpleStringProperty("");
