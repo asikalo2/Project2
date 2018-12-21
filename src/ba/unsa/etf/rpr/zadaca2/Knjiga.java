@@ -23,22 +23,35 @@ getDatumIzdanja treba vraćati vrijednost tipa java.time.LocalDate.
         naslov = new SimpleStringProperty(n);
         isbn = new SimpleStringProperty(i);
         brojStranica = new SimpleIntegerProperty(b);
+        datumIzdanja = LocalDate.now();
+    }
+
+    public Knjiga(String a, String n, String i, int b, LocalDate d) {
+        autor = new SimpleStringProperty(a);
+        naslov = new SimpleStringProperty(n);
+        isbn = new SimpleStringProperty(i);
+        brojStranica = new SimpleIntegerProperty(b);
+        datumIzdanja = d;
     }
 
     public String getIsbn() {
+
         return isbn.get();
     }
 
     public SimpleStringProperty isbnProperty() {
+
         return isbn;
     }
 
     public void setIsbn(String isbn) {
+
         this.isbn.set(isbn);
     }
 
 
     public String getNaslov() {
+
         return naslov.get();
     }
 
@@ -47,15 +60,18 @@ getDatumIzdanja treba vraćati vrijednost tipa java.time.LocalDate.
     }
 
     public void setNaslov(String naslov) {
+
         this.naslov.set(naslov);
     }
 
 
     public String getAutor() {
+
         return autor.get();
     }
 
     public SimpleStringProperty autorProperty() {
+
         return autor;
     }
 
@@ -64,6 +80,7 @@ getDatumIzdanja treba vraćati vrijednost tipa java.time.LocalDate.
     }
 
     public int getBrojStranica() {
+
         return brojStranica.get();
     }
 
@@ -77,7 +94,8 @@ getDatumIzdanja treba vraćati vrijednost tipa java.time.LocalDate.
 
     @Override
     public String toString() {
-        return autor.get() + ", " + naslov.get();
+        return autor.get() + ", " + naslov.get() + ", " + isbn.get() + ", " +
+                brojStranica.get() + ", " + datumIzdanja.getDayOfMonth() + ". " + datumIzdanja.getMonthValue() + ". " + datumIzdanja.getYear();
     }
 
 
