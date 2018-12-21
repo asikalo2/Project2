@@ -30,6 +30,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GlavnaController {
@@ -195,19 +196,18 @@ public class GlavnaController {
     }
 
     public void tbDelete(ActionEvent actionEvent) {
-      /*  Action response = Dialogs.create()
-                .owner(stage)
-                .title("Confirm Dialog with Custom Actions")
-                .masthead("Look, a Confirm Dialog with Custom Actions")
-                .message("Are you ok with this?")
-                .actions(Dialog.Actions.OK, Dialog.Actions.CANCEL)
-                .showConfirm();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Look, a Confirmation Dialog");
+        alert.setContentText("Da li želite potvrditi brisanje?");
 
-        if (response == Dialog.Actions.OK) {
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
             // ... user chose OK
         } else {
-            // ... user chose CANCEL, or closed the dialog
-        }*/
+            // ... user chose CANCEL or closed the dialog
+        }
+
     }
 
     public void tbChange(ActionEvent actionEvent) {
