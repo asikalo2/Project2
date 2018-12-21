@@ -10,8 +10,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        BibliotekaModel model;
+        GlavnaController controller;
+        model = new BibliotekaModel();
+        model.napuni();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("glavna.fxml"));
+        controller = new GlavnaController(model);
+        loader.setController(controller);
         Parent root = loader.load();
         primaryStage.setTitle("Biblioteka");
         primaryStage.setScene(new Scene(root, 300, 275));
