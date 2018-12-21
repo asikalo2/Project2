@@ -10,29 +10,30 @@ GlavnaController.
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicTextFieldUI;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.beans.XMLEncoder;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GlavnaController {
+   // private static final BasicTextFieldUI Dialogs = ;
     @FXML
     private MenuBar menuBar;
 
@@ -109,6 +110,23 @@ public class GlavnaController {
 
     public void handleAboutAction(ActionEvent actionEvent) {
         System.out.println("About");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("aboutforma.fxml"));
+            /*
+             * if "fx:controller" is not set in fxml
+             * fxmlLoader.setController(NewWindowController);
+             */
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("New Window");
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void OpenAction(ActionEvent actionEvent) {
@@ -144,6 +162,19 @@ public class GlavnaController {
     }
 
     public void tbDelete(ActionEvent actionEvent) {
+      /*  Action response = Dialogs.create()
+                .owner(stage)
+                .title("Confirm Dialog with Custom Actions")
+                .masthead("Look, a Confirm Dialog with Custom Actions")
+                .message("Are you ok with this?")
+                .actions(Dialog.Actions.OK, Dialog.Actions.CANCEL)
+                .showConfirm();
+
+        if (response == Dialog.Actions.OK) {
+            // ... user chose OK
+        } else {
+            // ... user chose CANCEL, or closed the dialog
+        }*/
     }
 
     public void tbChange(ActionEvent actionEvent) {
