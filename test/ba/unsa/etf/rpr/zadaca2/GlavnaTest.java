@@ -83,10 +83,18 @@ class GlavnaTest {
         try {
             String content = new String(Files.readAllBytes(Paths.get(test.getPath())));
 
-            assertTrue(content.contains("<knjiga brojStranica=\"500\">"));
-            assertTrue(content.contains("<autor>Meša Selimović</autor>"));
-            assertTrue(content.contains("<naslov>Harry Potter</naslov>"));
-            assertTrue(content.contains("<datum>01. 12. 2000</datum>"));
+            assertTrue(content.contains("<void property=\"brojStranica\">\n" +
+                    "     <int>500</int>\n" +
+                    "    </void>"));
+            assertTrue(content.contains("<void property=\"autor\">\n" +
+                    "     <string>Meša Selimović</string>\n" +
+                    "    </void>"));
+            assertTrue(content.contains("<void property=\"naslov\">\n" +
+                    "     <string>Harry Potter</string>\n" +
+                    "    </void>"));
+            assertTrue(content.contains("<object class=\"java.time.LocalDate\" method=\"parse\">\n" +
+                    "      <string>2000-12-01</string>\n" +
+                    "     </object>"));
         } catch(Exception e) {
             fail("Nije uspjelo čitanje datoteke");
         }

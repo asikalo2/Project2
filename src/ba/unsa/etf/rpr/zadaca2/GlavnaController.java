@@ -18,6 +18,7 @@ import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.assertj.core.internal.bytebuddy.asm.Advice;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -27,8 +28,13 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.beans.Encoder;
+import java.beans.Expression;
+import java.beans.PersistenceDelegate;
 import java.beans.XMLEncoder;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -51,15 +57,30 @@ public class GlavnaController {
        prikazati dijalog (Alert tipa Error) sa naslovom "Pogrešan format datoteke" i prikladnim tekstom, a
        postojeći sadržaj biblioteke treba ostati neizmijenjen. */
 
-    public static void doSave(File f) {
+    public void doSave(File f) {
         XMLEncoder encoder=null;
         try{
-            encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream("biblioteka.xml")));
+            encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream(f.getPath())));
+
+            encoder.setPersistenceDelegate(LocalDate.class,
+                    new PersistenceDelegate() {
+                        @Override
+                        protected Expression instantiate(Object localDate, Encoder encdr) {
+                            LocalDate ld = (LocalDate) localDate;
+                            ld.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                            return new Expression(localDate,
+                                    LocalDate.class,
+                                    "parse",
+                                    new Object[]{ ld.toString() });
+                        }
+                    });
+
+            encoder.writeObject(b.getKnjige().toArray());
+            encoder.close();
         }catch(FileNotFoundException fileNotFound){
             System.out.println("nije mogao kreirati xml datoteku");
         }
-        encoder.writeObject(f);
-        encoder.close();
+
 
     }
 

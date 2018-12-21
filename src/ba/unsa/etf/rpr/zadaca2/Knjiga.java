@@ -4,7 +4,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Knjiga {
 /*Pored postojećih atributa, klasa Knjiga treba imati i atribut datumIzdanja. Metoda
@@ -16,6 +15,7 @@ getDatumIzdanja treba vraćati vrijednost tipa java.time.LocalDate.
     private SimpleStringProperty isbn = new SimpleStringProperty("");
     private SimpleIntegerProperty brojStranica = new SimpleIntegerProperty(0);
     private java.time.LocalDate datumIzdanja;
+
     public Knjiga() {}
 
     public Knjiga(String a, String n, String i, int b) {
